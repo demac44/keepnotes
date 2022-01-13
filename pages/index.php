@@ -7,9 +7,16 @@
     require '../inc/connect_mysql.php';
     require '../inc/queries.php';
     require '../inc/header.php';
+
+    $get_user = $conn->query("SELECT * FROM users WHERE username='$user'");
+
+    foreach($get_user as $guser){
+        $bckg_color = $guser['bckg_color'];
+    }
+
 ?>
 
-<body>
+<?php echo "<body style='background-color: $bckg_color;'>" ?>
     <div class='navbar'>
         <form method='post' action='index.php' class='add-new-note'>
             <input type="hidden" name='new-note' value='new-note'>
@@ -21,12 +28,15 @@
         <h1>KeepNotes</h1>
         <form class='log-out' method='post' action='index.php'>
             <input type="hidden" name='log-out' value='log-out'>
-            <button class='log-out-btn' type='submit'>Log out</button>
-            <i class='fas fa-sign-out-alt'></i>
+            <button class='log-out-btn' type='submit'>
+                <p>Log out</p>
+                <i class='fas fa-sign-out-alt'></i>
+            </button>
         </form>     
     </div>
     <div class='notes'>
-        <?php 
+        <?php   
+            include '../inc/sidebar.php';
 
             $notes = $conn->query($sql);
 
@@ -76,10 +86,15 @@
                                 <button type='submit' style='background-color:yellow;'></button>
                             </form>
                             <form class='color' method='post' action='index.php'>
-                                <input type='hidden' value='#d13c3c' name='color[]'>
+                                <input type='hidden' value='#e63333' name='color[]'>
                                 <input type='hidden' value='{$note["note_id"]}' name='changecolorid[]'>
-                                <button type='submit' style='background-color:#d13c3c;'></button>
+                                <button type='submit' style='background-color:#e63333;'></button>
                             </form>
+                            <form class='color' method='post' action='index.php'>
+                                <input type='hidden' value='#c562a4' name='color[]'>
+                                <input type='hidden' value='{$note["note_id"]}' name='changecolorid[]'>
+                            <button type='submit' style='background-color:#c562a4;'></button>
+                        </form>
                         </div>
                     </div>"
                 ;}

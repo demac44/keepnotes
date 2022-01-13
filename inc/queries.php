@@ -6,6 +6,7 @@
     $insert = "INSERT INTO notes (username, note_text) VALUES ('$user', null);";
     $update = $conn->prepare("UPDATE notes SET note_text = ?, note_title = ? WHERE note_id = ?");
     $update_color = $conn->prepare("UPDATE notes SET color = ? WHERE note_id = ?");
+    $update_bckg = $conn->prepare("UPDATE users SET bckg_color = ?");
 
     if(isset($_POST)) {
         if(isset($_POST['id'])) {
@@ -39,6 +40,12 @@
         elseif(isset($_POST['log-out'])){
             setcookie('user-auth', "", time()-3600);
             header("Location: login.php");
+        }
+        elseif(isset($_POST['bckg-color'])){
+            $bcolor = $_POST['bckg-color'];
+            $update_bckg->bindParam(1, $bcolor[0], PDO::PARAM_STR);
+            $update_bckg->execute();
+            header("Location: index.php");
         }
     
     }

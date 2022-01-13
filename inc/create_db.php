@@ -5,7 +5,8 @@
 
         $create_tables = "CREATE TABLE IF NOT EXISTS users (
             username VARCHAR(25) NOT NULL UNIQUE,
-            pass VARCHAR(30) NOT NULL);
+            pass VARCHAR(30) NOT NULL,
+            bckg_color VARCHAR(20) DEFAULT '#1b1b1b');
 
             CREATE TABLE IF NOT EXISTS notes (
                 note_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
