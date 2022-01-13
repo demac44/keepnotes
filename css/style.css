@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@300&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+a{
+    text-decoration: none;
+}
+body{
+    background-color: rgb(11, 64, 111);
+    width: 100vw;
+    overflow-x: hidden;
+}
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px 5px 10px;
+    z-index: 10000;
+    background-color: rgb(11, 64, 111);
+}
+.add-new-note button{
+    display: flex;
+    align-items: center;
+    color: white;
+    border: 1px solid white;
+    border-radius: 30px;
+    padding: 10px;
+    cursor: pointer;
+    transition: ease .3s;
+    gap: 5px;
+    background-color: transparent;
+}
+.add-new-note button:hover{
+    background-color: rgb(71, 121, 165);
+}
+.add-new-note i{
+    font-size: 18px;
+}
+.log-out{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 30px;
+    transition: ease .3s;
+    cursor: pointer;
+}
+.log-out:hover{
+    background-color: rgb(71, 121, 165);
+}
+.navbar h1{
+    font-family: 'Dancing Script', cursive;
+    color: white;
+    font-size: 45px;
+}
+.notes{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 80px 20px 50px 10px;
+}
+.note{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius:5px;
+    overflow: hidden;
+    border: 1px solid #1b1b1b;
+}
+.note-title{
+    width: 100%;
+}
+.note-title textarea{
+    width: 100%;
+    max-height: 30px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 10px 20px 5px 5px;
+    font-weight: bolder;
+    font-size: 16px;
+    resize: none;
+    overflow: hidden;
+}
+.note-text{
+    width: 100%;
+    min-height: 250px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+.note-text textarea{
+    width: 100%;
+    min-height: 210px;
+    resize: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 5px 0 5px 5px;
+    font-size: 16px;
+}
+.del-btn{
+    outline: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+}
+.del-btn i{
+    font-size: 18px;
+}
+.update-btn{
+    outline: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    padding: 5px;
+    background-color: #1f1f1f;
+    color: white;
+    border-radius: 5px;
+}
+.update-btn:hover{
+    background-color: #3f3f3f;
+}
+.color-picker{
+    position: absolute;
+    bottom: 0px;
+    left: 5px;
+    display: flex;
+    gap: 5px;
+}
+.color-picker button{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #1b1b1b;
+    outline: none;
+    cursor: pointer;
+    color: #d13c3c;
+}
+.log-out-btn{
+    border: none;
+    outline: none;
+    color: white;
+    background-color: transparent;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+@media screen and (max-width:1300px){
+    .notes{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media screen and (max-width:991px){
+    .notes{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media screen and (max-width:786px){
+    .notes{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .add-new-note button p{
+        display: none;
+    }
+    .log-out p{
+        display: none;
+    }
+}
+@media screen and (max-width:540px){
+    .notes{
+        grid-template-columns: repeat(1, 1fr);
+        padding:80px 10px;
+    }
+}
