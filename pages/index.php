@@ -8,8 +8,8 @@
 
     $get_user = $conn->query("SELECT * FROM users WHERE username='$user'");
 
-    foreach($get_user as $guser){
-        $bckg_color = $guser['bckg_color'];
+    foreach($get_user as $usr){
+        $bckg_color = $usr['bckg_color'];
     }
 
 ?>
@@ -40,11 +40,27 @@
         <?php   
             include '../inc/sidebar.php';
 
+            $note_colors = array("rgb(247, 243, 119)", "teal", "#7653bb", "chartreuse", "yellow", "#e63333", "#c562a4");
+
+            
+            function setNoteColors($clrs, $note){
+                $temp = "";
+                foreach($clrs as $clr){
+                    $temp = $temp."
+                    <form method='post' action='index.php'>
+                        <input type='hidden' value='$clr' name='color[]'>
+                        <input type='hidden' value='{$note["note_id"]}' name='changecolorid[]'>
+                        <button type='submit' style='background-color:$clr;'></button>
+                    </form>
+                    ";
+                }
+                return $temp;
+            }
+
             $notes = $conn->query($sql);
 
             foreach($notes as $note){
-                echo "
-                    <div class='note' style='background-color: {$note['color']}'>
+                echo " <div class='note' style='background-color: {$note['color']}'>
                         <form method='post' action='index.php'>
                             <input type='hidden' name='id[]' value={$note["note_id"]}>
                             <button class='del-btn' type='submit'><i class='fas fa-trash'></i></button>
@@ -52,54 +68,19 @@
 
                         <form method='post' action='index.php'>
                             <input type='hidden' name='update_id[]' value={$note["note_id"]}>
+                            
                             <div class='note-title'>
                                 <textarea type='text' name='title[]' id='title1' value='note-title'>{$note["note_title"]}</textarea>
                             </div>
+
                             <div class='note-text'>
                                 <textarea name='text[]' id='text1' value='note_text'>{$note["note_text"]}</textarea>
                             </div>
-                        <button class='update-btn' type='submit'>SAVE</button>
+
+                            <button class='update-btn' type='submit'>SAVE</button>
                         </form>
 
-                        <div class='color-picker'>
-                            <form class='color' method='post' action='index.php'>
-                                <input type='hidden' value='rgb(247, 243, 119)' name='color[]'>
-                                <input type='hidden' value='{$note["note_id"]}' name='changecolorid[]'>
-                                <button type='submit' style='background-color:rgb(247, 243, 119);'></button>
-                            </form>
-                            <form class='color' method='post' action='index.php'>
-                                <input type='hidden' value='teal' name='color[]'>
-                                <input type='hidden' value='{$note["note_id"]}' name='changecolorid[]'>
-                                <button type='submit' style='background-color:teal;'></button>
-                            </form>
-                            <form class='color' method='post' action='index.php'>
-                                <input type='hidden' value='#7653bb' name='color[]'>
-                                <input type='hidden' value='{$note["note_id"]}' name='changecolorid[]'>
-                                <button type='submit' style='background-color:#7653bb;'></button>
-                            </form>
-                            <form class='color' method='post' action='index.php'>
-                                <input type='hidden' value='chartreuse' name='color[]'>
-                                <input type='hidden' value='{$note["note_id"]}' name='changecolorid[]'>
-                                <button type='submit' style='background-color:chartreuse;'></button>
-                            </form>
-                            <form class='color' method='post' action='index.php'>
-                                <input type='hidden' value='yellow' name='color[]'>
-                                <input type='hidden' value='{$note["note_id"]}' name='changecolorid[]'>
-                                <button type='submit' style='background-color:yellow;'></button>
-                            </form>
-                            <form class='color' method='post' action='index.php'>
-                                <input type='hidden' value='#e63333' name='color[]'>
-                                <input type='hidden' value='{$note["note_id"]}' name='changecolorid[]'>
-                                <button type='submit' style='background-color:#e63333;'></button>
-                            </form>
-                            <form class='color' method='post' action='index.php'>
-                                <input type='hidden' value='#c562a4' name='color[]'>
-                                <input type='hidden' value='{$note["note_id"]}' name='changecolorid[]'>
-                            <button type='submit' style='background-color:#c562a4;'></button>
-                        </form>
-                        </div>
-                    </div>"
-                ;}
+                        <div class='color-picker'>" , setNoteColors($note_colors, $note), "</div></div>";}
             ?>
         </div>
         <script src="https://kit.fontawesome.com/58812d83b9.js" crossorigin="anonymous"></script>
