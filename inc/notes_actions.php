@@ -1,6 +1,7 @@
-<?php require 'connect_mysql.php' ?>
+<?php
+    require 'db.php'; 
 
-<?php 
+    
     $sql = "SELECT * FROM notes WHERE username = '$user' ORDER BY note_id DESC";
     $delete = $conn->prepare("DELETE FROM notes WHERE note_id = ?");
     $insert = "INSERT INTO notes (username, note_text) VALUES ('$user', null);";
@@ -37,15 +38,15 @@
             $update_color->execute();
             header("Location: index.php");
         }
-        elseif(isset($_POST['log-out'])){
-            setcookie('user-auth', "", time()-3600);
-            header("Location: login.php");
-        }
         elseif(isset($_POST['bckg-color'])){
             $bcolor = $_POST['bckg-color'];
             $update_bckg->bindParam(1, $bcolor[0], PDO::PARAM_STR);
             $update_bckg->execute();
             header("Location: index.php");
+        }
+        elseif(isset($_POST['log-out'])){
+            setcookie('user-auth', "", time()-3600);
+            header("Location: login.php");
         }
     
     }

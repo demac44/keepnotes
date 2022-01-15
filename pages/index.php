@@ -4,9 +4,7 @@
     }
     else $user = $_COOKIE['user-auth'];
 
-    require '../inc/connect_mysql.php';
-    require '../inc/queries.php';
-    require '../inc/header.php';
+    require '../inc/notes_actions.php';
 
     $get_user = $conn->query("SELECT * FROM users WHERE username='$user'");
 
@@ -16,7 +14,11 @@
 
 ?>
 
-<?php echo "<body style='background-color: $bckg_color;'>" ?>
+<?php 
+    require '../inc/header.php';
+
+    echo "<body style='background-color: $bckg_color;'>" 
+?>
     <div class='navbar'>
         <form method='post' action='index.php' class='add-new-note'>
             <input type="hidden" name='new-note' value='new-note'>
