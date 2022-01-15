@@ -34,7 +34,8 @@
                 <p>Log out</p>
                 <i class='fas fa-sign-out-alt'></i>
             </button>
-        </form>     
+        </form>
+        <?php echo "<div style='display: $length_error;' class='length-err'>Title can be max.30 characters long!</div>"; ?>    
     </div>
     <div class='notes'>
         <?php   

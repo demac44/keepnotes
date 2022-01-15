@@ -9,6 +9,8 @@
     $update_color = $conn->prepare("UPDATE notes SET color = ? WHERE note_id = ?");
     $update_bckg = $conn->prepare("UPDATE users SET bckg_color = ?");
 
+    $length_error = "none";
+
     if(isset($_POST)) {
         if(isset($_POST['id'])) {
             $id = $_POST['id']; 
@@ -24,11 +26,18 @@
             $updateid = $_POST['update_id'];
             $note_text = $_POST['text'];
             $note_title = $_POST['title'];
-            $update->bindParam(1, $note_text[0], PDO::PARAM_STR);
-            $update->bindParam(2, $note_title[0], PDO::PARAM_STR);
-            $update->bindParam(3, $updateid[0], PDO::PARAM_INT);
-            $update->execute();
-            header("Location: index.php");
+
+            if(strlen($note_title[0])>=30){
+                $length_error = "block";
+            }
+            else{
+                $update->bindParam(1, $note_text[0], PDO::PARAM_STR);
+                $update->bindParam(2, $note_title[0], PDO::PARAM_STR);
+                $update->bindParam(3, $updateid[0], PDO::PARAM_INT);
+                $update->execute();
+                header("Location: index.php");
+
+            }
         }
         elseif(isset($_POST['color'])){
             $color = $_POST['color'];

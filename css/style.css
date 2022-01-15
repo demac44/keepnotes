@@ -178,6 +178,26 @@ body{
     outline: none;
     border-radius: 5px;
 }
+.length-err{
+    position: fixed;
+    top: -20px;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: #a21616;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(213, 213, 69);
+    animation-name: l_err;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes l_err{
+    0% {top: -100px;}
+    80% {top: 100px}
+    100% {top: -100px}
+}
 @media screen and (max-width:1300px){
     .notes{
         grid-template-columns: repeat(4, 1fr);
